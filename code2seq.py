@@ -68,7 +68,7 @@ def mysmac_from_cfg(cfg):
     #print(config.MAX_TARGET_PARTS)
     model = Model(config1)
     print("\n************************************* cfg ************************************\n ")
-    print(cfg.BATCH_SIZE,cfg.NUM_EPOCHS ,cfg.MAX_TARGET_PARTS)
+    print(cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'] ,cfg['MAX_TARGET_PARTS'])
     global ii
     #print("iiiiiiiiiiiiiiii     ")
     #print(ii)
