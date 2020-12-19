@@ -67,8 +67,8 @@ def mysmac_from_cfg(cfg):
     #print('###########   ')
     #print(config.MAX_TARGET_PARTS)
     model = Model(config1)
-    print("\n************************************* cfg ************************************\n ")
-    print(cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'] ,cfg['MAX_TARGET_PARTS'])
+    #print("\n************************************* cfg ************************************\n ")
+    #print(cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'] ,cfg['MAX_TARGET_PARTS'])
     global ii
     #print("iiiiiiiiiiiiiiii     ")
     #print(ii)
@@ -84,8 +84,8 @@ def mysmac_from_cfg(cfg):
         #print("otheriiiiiiiiiiiiiiii     ")
         #print(ii)
         results, precision, recall, f1, rouge = model.evaluate()
-    print("\n*************************************************************************\n ")
-    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    #print("\n*************************************************************************\n ")
+    #print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     ii=2
     return f1
 
@@ -184,15 +184,13 @@ if __name__ == '__main__':
     smac = BOHB4HPO(scenario=scenario, rng=np.random.RandomState(42),
                     tae_runner=mysmac_from_cfg,
                     intensifier_kwargs=intensifier_kwargs)  # all arguments related to intensifier can be passed like this
-    print("\n****************************after mysmac**************************************\n ")
-    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    
     # Example call of the function with default values
     # It returns: Status, Cost, Runtime, Additional Infos
-    def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
-                                          instance='1', budget=max_iters, seed=0)[1]
-    print("\n****************************after def-value**************************************\n ")
-    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
-    print("Value for default configuration: %.4f" % def_value)
+    #def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
+    #                                      instance='1', budget=max_iters, seed=0)[1]
+    
+    #print("Value for default configuration: %.4f" % def_value)
 
     # Start optimization
     try:
@@ -200,11 +198,10 @@ if __name__ == '__main__':
     finally:
         incumbent = smac.solver.incumbent
 
-    inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
-                                          budget=max_iters, seed=0)[1]
-    print("\n****************************after inc-value**************************************\n ")
-    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
-    print("Optimized Value: %.4f" % inc_value)
+    #inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
+    #                                      budget=max_iters, seed=0)[1]
+    
+    #print("Optimized Value: %.4f" % inc_value)
     
 ##################-----smac mlp-----###################
 #     config.BATCH_SIZE=best[0]
