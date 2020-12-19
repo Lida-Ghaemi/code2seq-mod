@@ -40,6 +40,10 @@ import sys
 print("I am in code2seq")
 
 ii=0
+if args.debug:
+    config1 = Config.get_debug_config(args)
+else:
+    config1 = Config.get_default_config(args)
 def mysmac_from_cfg(cfg):
     
     # For deactivated parameters, the configuration stores None-values.
@@ -66,7 +70,8 @@ def mysmac_from_cfg(cfg):
     #print('###########   ')
     #print(config.MAX_TARGET_PARTS)
     model = Model(config1)
-    
+    print("\n************************************* cfg ************************************\n ")
+    print(cfg.BATCH_SIZE,cfg.NUM_EPOCHS ,cfg.MAX_TARGET_PARTS)
     global ii
     #print("iiiiiiiiiiiiiiii     ")
     #print(ii)
@@ -82,11 +87,13 @@ def mysmac_from_cfg(cfg):
         #print("otheriiiiiiiiiiiiiiii     ")
         #print(ii)
         results, precision, recall, f1, rouge = model.evaluate()
+    print("\n*************************************************************************\n ")
+    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     ii=2
     return f1
 
 if __name__ == '__main__':
-    
+    global config1
     parser = ArgumentParser()
     parser.add_argument("-d", "--data", dest="data_path",
                         help="path to preprocessed dataset", required=False)
@@ -107,10 +114,10 @@ if __name__ == '__main__':
 
     np.random.seed(args.seed)
     tf.set_random_seed(args.seed)
-    if args.debug:
-        config1 = Config.get_debug_config(args)
-    else:
-        config1 = Config.get_default_config(args)
+#     if args.debug:
+#         config1 = Config.get_debug_config(args)
+#     else:
+#         config1 = Config.get_default_config(args)
     
     #logger = logging.getLogger("MLP-example")
    
@@ -122,10 +129,11 @@ if __name__ == '__main__':
     # Build Configuration Space which defines all parameters and their ranges
     cs = ConfigurationSpace()
     BATCH_SIZE=UniformIntegerHyperparameter('BATCH_SIZE', 128, 512, default_value=128) 
-    #print("dash bashuvaaaaaaaaaaaaaaaaaaaaaaa")   
+    cs.add_hyperparameters(BATCH_SIZE) 
     NUM_EPOCHS =UniformIntegerHyperparameter("NUM_EPOCHS", 7, 11, default_value=7)
+    cs.add_hyperparameters(NUM_EPOCHS) 
     MAX_TARGET_PARTS=UniformIntegerHyperparameter("MAX_TARGET_PARTS", 6, 11, default_value=6)
-    cs.add_hyperparameters([BATCH_SIZE,NUM_EPOCHS,MAX_TARGET_PARTS])
+    cs.add_hyperparameters(MAX_TARGET_PARTS)
     # We define a few possible types of SVM-kernels and add them as "kernel" to our cs
     #kernel = CategoricalHyperparameter("kernel", ["linear", "rbf", "poly", "sigmoid"], default_value="poly")
     #cs.add_hyperparameter(kernel)
@@ -228,7 +236,7 @@ if __name__ == '__main__':
     
     model = Model(config1)
     print("\n************************************* this is the config to train ************************************\n ")
-    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    #print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
       #model = Model(config)
     print('Created model')
     if config1.TRAIN_PATH:
