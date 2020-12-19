@@ -40,10 +40,7 @@ import sys
 print("I am in code2seq")
 
 ii=0
-if args.debug:
-    config1 = Config.get_debug_config(args)
-else:
-    config1 = Config.get_default_config(args)
+
 def mysmac_from_cfg(cfg):
     
     # For deactivated parameters, the configuration stores None-values.
@@ -93,7 +90,7 @@ def mysmac_from_cfg(cfg):
     return f1
 
 if __name__ == '__main__':
-    global config1
+    #global config1
     parser = ArgumentParser()
     parser.add_argument("-d", "--data", dest="data_path",
                         help="path to preprocessed dataset", required=False)
@@ -114,10 +111,11 @@ if __name__ == '__main__':
 
     np.random.seed(args.seed)
     tf.set_random_seed(args.seed)
-#     if args.debug:
-#         config1 = Config.get_debug_config(args)
-#     else:
-#         config1 = Config.get_default_config(args)
+    if args.debug:
+        config1 = Config.get_debug_config(args)
+    else:
+        config1 = Config.get_default_config(args)
+
     
     #logger = logging.getLogger("MLP-example")
    
