@@ -187,10 +187,10 @@ if __name__ == '__main__':
     
     # Example call of the function with default values
     # It returns: Status, Cost, Runtime, Additional Infos
-    #def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
-    #                                      instance='1', budget=max_iters, seed=0)[1]
+#     def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
+#                                           instance='1', budget=max_iters, seed=0)[1]
     
-    #print("Value for default configuration: %.4f" % def_value)
+#     print("Value for default configuration: %.4f" % def_value)
 
     # Start optimization
     try:
@@ -198,19 +198,20 @@ if __name__ == '__main__':
     finally:
         incumbent = smac.solver.incumbent
 
-    #inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
-    #                                      budget=max_iters, seed=0)[1]
+    inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
+                                          budget=max_iters, seed=0)[1]
     
     #print("Optimized Value: %.4f" % inc_value)
     
 ##################-----smac mlp-----###################
-#     config.BATCH_SIZE=best[0]
-#       #config.RNN_SIZE =indiv[1]*2
-#     config.NUM_EPOCHS =best[1]
-#       #config.NUM_DECODER_LAYERS=indiv[2]
-#     config.MAX_TARGET_PARTS=best[2]
-      #model = Model(config)
-
+    config1.BATCH_SIZE = incumbent['BATCH_SIZE']
+    #print('###########   ')
+    #print(config.BATCH_SIZE)
+    config1.NUM_EPOCHS = incumbent['NUM_EPOCHS']
+    #print('###########   ')
+   # print(type(config.NUM_EPOCHS))
+    config1.MAX_TARGET_PARTS = incumbent['MAX_TARGET_PARTS'] 
+                                
      #def print_hyperparams(self):
     print('Training batch size:\t\t\t', config1.BATCH_SIZE)
     print('Epochs:\t\t\t\t\t\t', config1.NUM_EPOCHS)
