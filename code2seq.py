@@ -184,7 +184,7 @@ if __name__ == '__main__':
     smac = BOHB4HPO(scenario=scenario, rng=np.random.RandomState(42),
                     tae_runner=mysmac_from_cfg,
                     intensifier_kwargs=intensifier_kwargs)  # all arguments related to intensifier can be passed like this
-
+#return f1,cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'],cfg['MAX_TARGET_PARTS']
     # Example call of the function with default values
     # It returns: Status, Cost, Runtime, Additional Infos
     def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
@@ -200,6 +200,18 @@ if __name__ == '__main__':
     inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
                                           budget=max_iters, seed=0)[1]
     print("Optimized Value: %.4f" % inc_value)
+    config1.BATCH_SIZE = cfg['BATCH_SIZE']
+    #print('###########   ')
+    #print(config.BATCH_SIZE)
+    config1.NUM_EPOCHS = cfg['NUM_EPOCHS']
+    #print('###########   ')
+   # print(type(config.NUM_EPOCHS))
+    config1.MAX_TARGET_PARTS = cfg['MAX_TARGET_PARTS']  
+    #print('###########   ')
+    #print(config.MAX_TARGET_PARTS)
+    
+    print("\n************************************* final cfg ************************************\n ")
+    print(cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'] ,cfg['MAX_TARGET_PARTS'])
 ##################-----smac mlp-----###################
 #     config.BATCH_SIZE=best[0]
 #       #config.RNN_SIZE =indiv[1]*2
