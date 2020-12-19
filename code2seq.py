@@ -127,11 +127,11 @@ if __name__ == '__main__':
     # Build Configuration Space which defines all parameters and their ranges
     cs = ConfigurationSpace()
     BATCH_SIZE=UniformIntegerHyperparameter('BATCH_SIZE', 128, 512, default_value=128) 
-    cs.add_hyperparameters(BATCH_SIZE) 
+    #cs.add_hyperparameters(BATCH_SIZE) 
     NUM_EPOCHS =UniformIntegerHyperparameter("NUM_EPOCHS", 7, 11, default_value=7)
-    cs.add_hyperparameters(NUM_EPOCHS) 
+    #cs.add_hyperparameters(NUM_EPOCHS) 
     MAX_TARGET_PARTS=UniformIntegerHyperparameter("MAX_TARGET_PARTS", 6, 11, default_value=6)
-    cs.add_hyperparameters(MAX_TARGET_PARTS)
+    cs.add_hyperparameters([BATCH_SIZE,NUM_EPOCHS,MAX_TARGET_PARTS])
     # We define a few possible types of SVM-kernels and add them as "kernel" to our cs
     #kernel = CategoricalHyperparameter("kernel", ["linear", "rbf", "poly", "sigmoid"], default_value="poly")
     #cs.add_hyperparameter(kernel)
