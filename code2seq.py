@@ -55,6 +55,7 @@ def mysmac_from_cfg(cfg):
 #    clf = svm.SVC(**cfg, random_state=42)
     #print('############## ')
     #print(config.BATCH_SIZE)
+    global config1
     config1.BATCH_SIZE = cfg['BATCH_SIZE']
     #print('###########   ')
     #print(config.BATCH_SIZE)
