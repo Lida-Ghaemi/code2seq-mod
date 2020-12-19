@@ -184,11 +184,14 @@ if __name__ == '__main__':
     smac = BOHB4HPO(scenario=scenario, rng=np.random.RandomState(42),
                     tae_runner=mysmac_from_cfg,
                     intensifier_kwargs=intensifier_kwargs)  # all arguments related to intensifier can be passed like this
-#return f1,cfg['BATCH_SIZE'],cfg['NUM_EPOCHS'],cfg['MAX_TARGET_PARTS']
+    print("\n****************************after mysmac**************************************\n ")
+    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     # Example call of the function with default values
     # It returns: Status, Cost, Runtime, Additional Infos
     def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
                                           instance='1', budget=max_iters, seed=0)[1]
+    print("\n****************************after def-value**************************************\n ")
+    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     print("Value for default configuration: %.4f" % def_value)
 
     # Start optimization
@@ -199,6 +202,8 @@ if __name__ == '__main__':
 
     inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
                                           budget=max_iters, seed=0)[1]
+    print("\n****************************after inc-value**************************************\n ")
+    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     print("Optimized Value: %.4f" % inc_value)
     
 ##################-----smac mlp-----###################
@@ -211,7 +216,7 @@ if __name__ == '__main__':
 
      #def print_hyperparams(self):
     print('Training batch size:\t\t\t', config1.BATCH_SIZE)
-    print('Epochs:\t\t\t\t', config1.NUM_EPOCHS)
+    print('Epochs:\t\t\t\t\t\t', config1.NUM_EPOCHS)
     print('Max target length:\t\t\t', config1.MAX_TARGET_PARTS)
     print('Dataset path:\t\t\t\t', config1.TRAIN_PATH)
     print('Training file path:\t\t\t', config1.TRAIN_PATH + '.train.c2s')
