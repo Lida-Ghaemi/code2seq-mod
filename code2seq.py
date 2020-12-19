@@ -191,7 +191,7 @@ if __name__ == '__main__':
     def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
                                           instance='1', budget=max_iters, seed=0)[1]
     print("\n****************************after def-value**************************************\n ")
-    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     print("Value for default configuration: %.4f" % def_value)
 
     # Start optimization
@@ -203,7 +203,7 @@ if __name__ == '__main__':
     inc_value = smac.get_tae_runner().run(config=incumbent, instance='1',
                                           budget=max_iters, seed=0)[1]
     print("\n****************************after inc-value**************************************\n ")
-    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     print("Optimized Value: %.4f" % inc_value)
     
 ##################-----smac mlp-----###################
