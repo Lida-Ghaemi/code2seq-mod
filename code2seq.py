@@ -185,7 +185,7 @@ if __name__ == '__main__':
                     tae_runner=mysmac_from_cfg,
                     intensifier_kwargs=intensifier_kwargs)  # all arguments related to intensifier can be passed like this
     print("\n****************************after mysmac**************************************\n ")
-    print(f1,config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
+    print(config1.BATCH_SIZE,config1.NUM_EPOCHS ,config1.MAX_TARGET_PARTS)
     # Example call of the function with default values
     # It returns: Status, Cost, Runtime, Additional Infos
     def_value = smac.get_tae_runner().run(config=cs.get_default_configuration(),
